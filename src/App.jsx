@@ -1,6 +1,32 @@
+import { use, useState } from 'react';
 import './App.css';
 
 const App = () => {
+  const [expenseName, setExpenseName] = useState('');
+  const [expenseAmount, setExpenseAmount] = useState('');
+  const [expenses, setExpenses] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newExpense = {
+      id: crypto.randomUUID(),
+      name: expenseName,
+      amount: Number(expenseAmount),
+    };
+
+    setExpenses((prevExpenses) => {
+      const updatedExpenses = [...prevExpenses, newExpense];
+      console.log(updatedExpenses);
+      return updatedExpenses;
+    });
+
+    setExpenseName('');
+    setExpenseAmount('');
+
+    console.log(expenses);
+  };
+
   return (
     <main className="page">
       <section className="tracker">
@@ -19,20 +45,50 @@ const App = () => {
           <p className="summary-total">$0.00</p>
         </section>
 
-        <form className="expense-form">
+        <form className="expense-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="expense-name">Expense Name</label>
-            <input type="text" id="expense-name" placeholder='Coffee, groceries...' />
+            <input
+              type="text"
+              id="expense-name"
+              placeholder="Coffee, groceries..."
+              value={expenseName}
+              onChange={(e) => {
+                setExpenseName(e.target.value);
+              }}
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="expense-amount">Amount</label>
-            <input type="number" id="expense-amount" placeholder='$25.00' />
+            <input
+              type="number"
+              id="expense-amount"
+              placeholder="$25.00"
+              value={expenseAmount}
+              onChange={(e) => {
+                setExpenseAmount(e.target.value);
+              }}
+            />
           </div>
 
           <button type="submit">Add Expense</button>
         </form>
 
+        <section className="expense-list-section">
+          <h2>Expenses</h2>
+
+          <ul className="expense-list">
+            {expenses.map((expense) => {
+              return (
+                <li className="expense-item" key={expense.id}>
+                  <span>{expense.name}</span>
+                  <strong>{expense.amount}</strong>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
       </section>
     </main>
   );
