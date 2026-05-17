@@ -29,27 +29,71 @@
 }
 
 .tracker-description {
-    max-width: 38rem;
-    margin-top: 1rem;
-    color: var(--muted);
-    line-height: 1.7;
+  max-width: 38rem;
+  margin-top: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
 }
 
 .summary-card {
-    padding: 1.5rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
 }
 
 .summary-label {
-    margin: 0 0 0.5rem;
-    color: var(--muted);
-    font-size: 0.875rem;
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: 0.875rem;
 }
 
 .summary-total {
-    margin: 0;
-    font-size: 2.5rem;
-    font-weight: 800;
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.expense-form {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.form-group input {
+  padding: 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--text);
+  font: inherit;
+}
+
+.expense-form button {
+  border: none;
+  padding: 0.9rem 1.25rem;
+  border-radius: 0.75rem;
+  background: var(--accent);
+  color: #0f172a;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.expense-form button:hover {
+  background: var(--accent-dark);
 }
