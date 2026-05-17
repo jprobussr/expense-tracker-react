@@ -8,6 +8,9 @@
   --accent-dark: #0284c7;
   --danger: #ef4444;
   --border: #334155;
+
+  --radius-lg: 1.25rem;
+  --container: 46rem;
 }
 
 *,
