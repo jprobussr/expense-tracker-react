@@ -35,6 +35,14 @@ const App = () => {
     return total + expense.amount;
   }, 0);
 
+  const handleDeleteExpense = (id) => {
+    setExpenses((prevExpenses) => {
+      return prevExpenses.filter((expense) => {
+        return expense.id !== id;
+      });
+    });
+  };
+
   return (
     <main className="page">
       <section className="tracker">
@@ -92,6 +100,13 @@ const App = () => {
                 <li className="expense-item" key={expense.id}>
                   <span>{expense.name}</span>
                   <strong>${expense.amount.toFixed(2)}</strong>
+
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteExpense(expense.id)}
+                  >
+                    Delete
+                  </button>
                 </li>
               );
             })}
