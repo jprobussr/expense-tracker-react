@@ -9,9 +9,13 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (expenseName.trim() === '' || Number(expenseAmount) <= 0) {
+      return;
+    }
+
     const newExpense = {
       id: crypto.randomUUID(),
-      name: expenseName,
+      name: expenseName.trim(),
       amount: Number(expenseAmount),
     };
 
@@ -26,6 +30,10 @@ const App = () => {
 
     console.log(expenses);
   };
+
+  const totalSpent = expenses.reduce((total, expense) => {
+    return total + expense.amount;
+  }, 0);
 
   return (
     <main className="page">
@@ -42,7 +50,7 @@ const App = () => {
 
         <section className="summary-card" aria-label="Expense Summary">
           <p className="summary-label">Total Spent</p>
-          <p className="summary-total">$0.00</p>
+          <p className="summary-total">${totalSpent.toFixed(2)}</p>
         </section>
 
         <form className="expense-form" onSubmit={handleSubmit}>
@@ -83,7 +91,7 @@ const App = () => {
               return (
                 <li className="expense-item" key={expense.id}>
                   <span>{expense.name}</span>
-                  <strong>{expense.amount}</strong>
+                  <strong>${expense.amount.toFixed(2)}</strong>
                 </li>
               );
             })}
