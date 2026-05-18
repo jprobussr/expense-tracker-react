@@ -74,7 +74,8 @@
   font-weight: 600;
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
   padding: 0.9rem 1rem;
   border: 1px solid var(--border);
   border-radius: 0.75rem;
@@ -124,6 +125,15 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 0.9rem;
+}
+
+.expense-item p {
+  margin: 0 0 0.35rem;
+  font-weight: 600;
+}
+
+.expense-item small {
+  color: var(--muted);
 }
 
 .expense-item button {

@@ -5,6 +5,7 @@ const App = () => {
   const [expenseName, setExpenseName] = useState('');
   const [expenseAmount, setExpenseAmount] = useState('');
   const [expenses, setExpenses] = useState([]);
+  const [expenseCategory, setExpenseCategory] = useState('Food');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,6 +18,7 @@ const App = () => {
       id: crypto.randomUUID(),
       name: expenseName.trim(),
       amount: Number(expenseAmount),
+      category: expenseCategory,
     };
 
     setExpenses((prevExpenses) => {
@@ -27,7 +29,7 @@ const App = () => {
 
     setExpenseName('');
     setExpenseAmount('');
-
+    setExpenseCategory('Food')
     console.log(expenses);
   };
 
@@ -88,6 +90,21 @@ const App = () => {
             />
           </div>
 
+          <div className="form-group">
+            <label htmlFor="expense-category">Category</label>
+            <select
+              id="expense-category"
+              value={expenseCategory}
+              onChange={(e) => setExpenseCategory(e.target.value)}
+            >
+              <option value="Food">Food</option>
+              <option value="Bills">Bills</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
           <button type="submit">Add Expense</button>
         </form>
 
@@ -101,7 +118,14 @@ const App = () => {
               {expenses.map((expense) => {
                 return (
                   <li className="expense-item" key={expense.id}>
-                    <span>{expense.name}</span>
+                   <div>
+                    <p>
+                      {expense.name}
+                    </p>
+                    <small>
+                      {expense.category}
+                    </small>
+                   </div>
                     <strong>${expense.amount.toFixed(2)}</strong>
 
                     <button
