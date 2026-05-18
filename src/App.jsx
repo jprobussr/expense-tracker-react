@@ -1,10 +1,14 @@
-import { use, useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 const App = () => {
   const [expenseName, setExpenseName] = useState('');
   const [expenseAmount, setExpenseAmount] = useState('');
-  const [expenses, setExpenses] = useState([]);
+  const [expenses, setExpenses] = useState(() => {
+    const savedExpenses = localStorage.getItem('expenses');
+
+    return savedExpenses ? JSON.parse(savedExpenses) : [];
+  });
   const [expenseCategory, setExpenseCategory] = useState('Food');
   const [selectCategory, setSelectedCategory] = useState('All');
 
@@ -52,6 +56,10 @@ const App = () => {
       });
     });
   };
+
+  useEffect(() => {
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+  }, [expenses]);
 
   return (
     <main className="page">
