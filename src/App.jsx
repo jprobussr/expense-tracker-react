@@ -94,23 +94,27 @@ const App = () => {
         <section className="expense-list-section">
           <h2>Expenses</h2>
 
-          <ul className="expense-list">
-            {expenses.map((expense) => {
-              return (
-                <li className="expense-item" key={expense.id}>
-                  <span>{expense.name}</span>
-                  <strong>${expense.amount.toFixed(2)}</strong>
+          {expenses.length === 0 ? (
+            <p className="empty-state">No expenses added yet.</p>
+          ) : (
+            <ul className="expense-list">
+              {expenses.map((expense) => {
+                return (
+                  <li className="expense-item" key={expense.id}>
+                    <span>{expense.name}</span>
+                    <strong>${expense.amount.toFixed(2)}</strong>
 
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteExpense(expense.id)}
-                  >
-                    Delete
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteExpense(expense.id)}
+                    >
+                      Delete
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </section>
       </section>
     </main>
