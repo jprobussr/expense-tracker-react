@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import SummaryCard from './components/summaryCard.jsx';
+import ExpenseForm from './components/ExpenseForm.jsx';
+import ExpenseList from './components/ExpenseList.jsx';
 
 const App = () => {
   const [expenseName, setExpenseName] = useState('');
@@ -74,101 +77,24 @@ const App = () => {
           </p>
         </header>
 
-        <section className="summary-card" aria-label="Expense Summary">
-          <p className="summary-label">Total Spent</p>
-          <p className="summary-total">${totalSpent.toFixed(2)}</p>
-        </section>
+        <SummaryCard totalSpent={totalSpent} />
 
-        <form className="expense-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="expense-name">Expense Name</label>
-            <input
-              type="text"
-              id="expense-name"
-              placeholder="Coffee, groceries..."
-              value={expenseName}
-              onChange={(e) => {
-                setExpenseName(e.target.value);
-              }}
-            />
-          </div>
+        <ExpenseForm
+          handleSubmit={handleSubmit}
+          expenseName={expenseName}
+          setExpenseName={setExpenseName}
+          expenseAmount={expenseAmount}
+          setExpenseAmount={setExpenseAmount}
+          expenseCategory={expenseCategory}
+          setExpenseCategory={setExpenseCategory}
+        />
 
-          <div className="form-group">
-            <label htmlFor="expense-amount">Amount</label>
-            <input
-              type="number"
-              id="expense-amount"
-              placeholder="$25.00"
-              value={expenseAmount}
-              onChange={(e) => {
-                setExpenseAmount(e.target.value);
-              }}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="expense-category">Category</label>
-            <select
-              id="expense-category"
-              value={expenseCategory}
-              onChange={(e) => setExpenseCategory(e.target.value)}
-            >
-              <option value="Food">Food</option>
-              <option value="Bills">Bills</option>
-              <option value="Transportation">Transportation</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <button type="submit">Add Expense</button>
-        </form>
-
-        <section className="expense-list-section">
-          <h2>Expenses</h2>
-
-          <div className="filter-row">
-            <label htmlFor="category-filter">Filter by category</label>
-
-            <select
-              id="category-filter"
-              value={setSelectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              <option value="All">All</option>
-              <option value="Food">Food</option>
-              <option value="Bills">Bills</option>
-              <option value="Transportation">Transportation</option>
-              <option value="Entertainment">Entertainment</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          {filteredExpenses.length === 0 ? (
-            <p className="empty-state">No expenses added yet.</p>
-          ) : (
-            <ul className="expense-list">
-              {filteredExpenses.map((expense) => {
-                return (
-                  <li className="expense-item" key={expense.id}>
-                    <div>
-                      <p>{expense.name}</p>
-                      <small>{expense.category}</small>
-                    </div>
-                    <strong>${expense.amount.toFixed(2)}</strong>
-
-                    <button
-                      type="button"
-                      onClick={() => handleDeleteExpense(expense.id)}
-                    >
-                      Delete
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </section>
+        <ExpenseList
+          selectCategory={selectCategory}
+          setSelectedCategory={setSelectedCategory}
+          filteredExpenses={filteredExpenses}
+          handleDeleteExpense={handleDeleteExpense}
+        />
       </section>
     </main>
   );
