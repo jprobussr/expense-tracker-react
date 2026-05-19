@@ -31,14 +31,14 @@ const App = () => {
 
     setExpenses((prevExpenses) => {
       const updatedExpenses = [...prevExpenses, newExpense];
-      console.log(updatedExpenses);
+      
       return updatedExpenses;
     });
 
     setExpenseName('');
     setExpenseAmount('');
     setExpenseCategory('Food');
-    console.log(expenses);
+    
   };
 
   const totalSpent = expenses.reduce((total, expense) => {
