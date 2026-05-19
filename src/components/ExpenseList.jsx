@@ -28,7 +28,11 @@ const ExpenseList = ({
       </div>
 
       {filteredExpenses.length === 0 ? (
-        <p className="empty-state">{selectCategory === 'All' ? 'No Expenses added yet.' : `No ${selectCategory.toLowerCase()} expenses found.`}</p>
+        <p className="empty-state">
+          {selectCategory === 'All'
+            ? 'No Expenses added yet.'
+            : `No ${selectCategory.toLowerCase()} expenses found.`}
+        </p>
       ) : (
         <ul className="expense-list">
           {filteredExpenses.map((expense) => {
